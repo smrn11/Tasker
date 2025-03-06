@@ -1,0 +1,14 @@
+@Entity
+@Table(name = "users")
+public class User {
+    
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private String email;
+    private String password; // Will be encrypted with BCrypt
+
+    @OneToMany(mappedBy = "user")
+    private List<Task> tasks = new ArrayList<>();
+}
