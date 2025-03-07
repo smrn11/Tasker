@@ -1,18 +1,25 @@
-@Entity
-@Table(name = "tasks")
+package com.example.tasker.model;
 
-public class Task {
+import jakarta.persistence.*;
+import java.time.LocalDateTime;
+
+import lombok.Getter;
+import lombok.Setter;
+
+@Entity
+@Table(name = "task")
+@Getter
+@Setter
+public class TaskEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
-    private User user;
-
     private String title;
+
     private String description;
+
     private LocalDateTime dueDate;
 
     @Enumerated(EnumType.STRING)
