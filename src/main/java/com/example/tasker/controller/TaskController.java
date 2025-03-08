@@ -11,7 +11,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.http.HttpStatus;
 
 import com.example.tasker.service.TaskService;
-import com.example.tasker.mapper.TaskMapper;
 import com.example.tasker.model.*;
 
 
@@ -20,16 +19,14 @@ import com.example.tasker.model.*;
 public class TaskController {
 
     private TaskService taskService;
-    private TaskMapper taskMapper;
 
-    public TaskController(TaskService taskService, TaskMapper taskMapper) {
+    public TaskController(TaskService taskService) {
         this.taskService = taskService;
-        this.taskMapper = taskMapper;
     }
 
     @GetMapping("/{taskId}")
     public TaskDto getTask(@PathVariable Long taskId){
-        return taskMapper.entityToDto(taskService.getTask(taskId));
+        return taskService.getTask(taskId);
     }
 
     @PostMapping

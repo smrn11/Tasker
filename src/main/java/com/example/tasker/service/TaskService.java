@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.example.tasker.repository.TaskRepository;
 import com.example.tasker.mapper.TaskMapper;
+import com.example.tasker.mapper.UserMapper;
 import com.example.tasker.model.TaskDto;
 import com.example.tasker.model.TaskEntity;
 import com.example.tasker.model.UserEntity;
@@ -21,14 +22,17 @@ public class TaskService {
     @Autowired
     private UserService userService;
 
-    public TaskEntity getTask(Long taskId) {
-        return taskRepository.findById(taskId).orElse(null);
+    @Autowired
+    private UserMapper userMapper;
+
+    public TaskDto getTask(Long taskId) {
+        return taskMapper.entityToDto(taskRepository.findById(taskId).orElse(null));
     }
 
     public TaskDto createTask(TaskDto taskDto) {
         TaskEntity newTask = taskMapper.dtoToEntity(taskDto);
 
-        UserEntity user = userService.getUser(taskDto.getUserId());
+        UserEntity user = userMapper.toEntity(userService.getUser(taskDto.getUserId()));
         newTask.setUser(user);
 
         taskRepository.save(newTask);

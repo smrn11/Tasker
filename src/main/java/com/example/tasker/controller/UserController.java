@@ -11,7 +11,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.http.HttpStatus;
 
 import com.example.tasker.service.UserService;
-import com.example.tasker.mapper.UserMapper;
 import com.example.tasker.model.*;
 
 
@@ -20,22 +19,19 @@ import com.example.tasker.model.*;
 public class UserController {
 
     private UserService userService;
-    private UserMapper userMapper;
 
-    public UserController(UserService userService, UserMapper userMapper) {
+    public UserController(UserService userService) {
         this.userService = userService;
-        this.userMapper = userMapper;
     }
 
     @GetMapping("/{userId}")
     public UserDto getUser(@PathVariable Long userId){
-        return userMapper.toDto(userService.getUser(userId));
+        return userService.getUser(userId);
     }
 
     @PostMapping
     public ResponseEntity<UserDto> createTask(@RequestBody UserDto userDto) {
-        UserEntity newUserEntity = userMapper.toEntity(userDto);
-        UserDto createdUserDto = userMapper.toDto(userService.createUser(newUserEntity));
+        UserDto createdUserDto = userService.createUser(userDto);
         return new ResponseEntity<>(createdUserDto, HttpStatus.CREATED);
     }
 
