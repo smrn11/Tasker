@@ -33,9 +33,9 @@ public class TaskController {
     }
 
     @PostMapping
-    public ResponseEntity<TaskEntity> createTask(@RequestBody TaskEntity task) {
-        TaskEntity createdTask = taskService.createTask(task);
-        return new ResponseEntity<>(createdTask, HttpStatus.CREATED);
+    public ResponseEntity<TaskDto> createTask(@RequestBody TaskDto taskDto) {
+        TaskDto createdTaskDto = taskService.createTask(taskDto);
+        return new ResponseEntity<>(createdTaskDto, HttpStatus.CREATED);
     }
 
     @DeleteMapping("/{taskId}")

@@ -20,6 +20,7 @@ public class TaskMapper {
         taskDto.setDueDate(taskEntity.getDueDate());
         taskDto.setPriority(taskEntity.getPriority());
         taskDto.setCompleted(taskEntity.isCompleted());
+        taskDto.setUserId(taskEntity.getUser().getId());
 
         return taskDto;
     }

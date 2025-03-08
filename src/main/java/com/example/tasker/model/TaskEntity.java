@@ -26,4 +26,8 @@ public class TaskEntity {
     private Priority priority;
 
     private boolean completed = false;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private UserEntity user;    
 }

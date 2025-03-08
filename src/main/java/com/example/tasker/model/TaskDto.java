@@ -15,5 +15,5 @@ public class TaskDto {
     private LocalDateTime dueDate;
     private Priority priority;
     private boolean completed;
-    
+    private Long userId;
 }
