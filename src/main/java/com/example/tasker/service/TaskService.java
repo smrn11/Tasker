@@ -1,6 +1,10 @@
 package com.example.tasker.service;
 
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.example.tasker.repository.TaskRepository;
@@ -24,6 +28,12 @@ public class TaskService {
 
     @Autowired
     private UserMapper userMapper;
+
+    public List<TaskDto> getTasks(Long userId) {
+        return taskRepository.findAllByUserId(userId).stream()
+            .map(taskMapper::entityToDto)
+            .collect(Collectors.toList());
+    }
 
     public TaskDto getTask(Long taskId) {
         return taskMapper.entityToDto(taskRepository.findById(taskId).orElse(null));
