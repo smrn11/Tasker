@@ -10,6 +10,6 @@ Tasker is a task management application designed to help users organize and prio
 - Set due dates and reminders
 - Mark tasks as complete
 - User-friendly interface
-    ```
+
 Smaran Sandri
 
