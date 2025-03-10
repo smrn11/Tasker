@@ -31,23 +31,23 @@ public class TaskService {
 
     public List<TaskDto> getTasks(Long userId) {
         return taskRepository.findAllByUserId(userId).stream()
-            .map(taskMapper::entityToDto)
+            .map(taskMapper::toDto)
             .collect(Collectors.toList());
     }
 
     public TaskDto getTask(Long taskId) {
-        return taskMapper.entityToDto(taskRepository.findById(taskId).orElse(null));
+        return taskMapper.toDto(taskRepository.findById(taskId).orElse(null));
     }
 
     public TaskDto createTask(TaskDto taskDto) {
-        TaskEntity newTask = taskMapper.dtoToEntity(taskDto);
+        TaskEntity newTask = taskMapper.toEntity(taskDto);
 
         UserEntity user = userMapper.toEntity(userService.getUser(taskDto.getUserId()));
         newTask.setUser(user);
 
         taskRepository.save(newTask);
 
-        return taskMapper.entityToDto(newTask);
+        return taskMapper.toDto(newTask);
     }
 
     public void deleteTask(Long taskId) {

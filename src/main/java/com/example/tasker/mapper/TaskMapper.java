@@ -8,7 +8,7 @@ import com.example.tasker.model.TaskDto;
 @Component
 public class TaskMapper {
 
-    public TaskDto entityToDto(TaskEntity taskEntity) {
+    public TaskDto toDto(TaskEntity taskEntity) {
         if (taskEntity == null) {
             return null;
         }
@@ -25,7 +25,7 @@ public class TaskMapper {
         return taskDto;
     }
 
-    public TaskEntity dtoToEntity(TaskDto taskDto) {
+    public TaskEntity toEntity(TaskDto taskDto) {
         if (taskDto == null) {
             return null;
         }
