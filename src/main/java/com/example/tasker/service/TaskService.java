@@ -2,6 +2,7 @@ package com.example.tasker.service;
 
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.example.tasker.repository.TaskRepository;
 import com.example.tasker.mapper.TaskMapper;
 import com.example.tasker.mapper.UserMapper;
+import com.example.tasker.model.Priority;
 import com.example.tasker.model.TaskDto;
 import com.example.tasker.model.TaskEntity;
 import com.example.tasker.model.UserEntity;
@@ -29,8 +31,9 @@ public class TaskService {
     @Autowired
     private UserMapper userMapper;
 
-    public List<TaskDto> getTasks(Long userId) {
-        return taskRepository.findAllByUserId(userId).stream()
+    public List<TaskDto> getTasks(Long userId, LocalDateTime startDate, LocalDateTime endDate, Priority priority, Boolean completedStatus) {
+        List<TaskEntity> tasks = taskRepository.findTasksByFilters(userId, startDate, endDate, priority, completedStatus);
+        return tasks.stream()
             .map(taskMapper::toDto)
             .collect(Collectors.toList());
     }
