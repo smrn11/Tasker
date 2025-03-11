@@ -3,6 +3,7 @@ package com.example.tasker.controller;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,6 +20,7 @@ import com.example.tasker.model.*;
 
 @RestController
 @RequestMapping("/tasker/user")
+@CrossOrigin(origins = "http://127.0.0.1:5500")
 public class UserController {
 
     private UserService userService;
