@@ -8,6 +8,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.http.ResponseEntity;
+
+import java.util.List;
+
 import org.springframework.http.HttpStatus;
 
 import com.example.tasker.service.UserService;
@@ -27,6 +30,11 @@ public class UserController {
     @GetMapping("/{userId}")
     public UserDto getUser(@PathVariable Long userId){
         return userService.getUser(userId);
+    }
+
+    @GetMapping("/list")
+    public List<UserDto> getUsers() {
+        return userService.getUsers();
     }
 
     @PostMapping

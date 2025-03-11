@@ -1,6 +1,10 @@
 package com.example.tasker.service;
 
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.example.tasker.repository.UserRepository;
@@ -19,6 +23,12 @@ public class UserService {
 
     public UserDto getUser(Long userId) {
         return userMapper.toDto(userRepository.findById(userId).orElse(null));
+    }
+
+    public List<UserDto> getUsers() {
+        return userRepository.findAll().stream()
+            .map(userMapper::toDto)
+            .collect(Collectors.toList());
     }
 
     public UserDto createUser(UserDto userDto) {
