@@ -17,7 +17,6 @@ import org.springframework.http.HttpStatus;
 import com.example.tasker.service.UserService;
 import com.example.tasker.model.*;
 
-
 @RestController
 @RequestMapping("/tasker/user")
 @CrossOrigin(origins = "http://127.0.0.1:5500")
@@ -49,5 +48,11 @@ public class UserController {
     public ResponseEntity<Void> deleteUser(@PathVariable Long userId) {
         userService.deleteUser(userId);
         return ResponseEntity.noContent().build();
+    }
+
+    // Health or status endpoint
+    @GetMapping("/status")
+    public ResponseEntity<String> getStatus() {
+        return new ResponseEntity<>("Application is running", HttpStatus.OK);
     }
 }
