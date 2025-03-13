@@ -2,7 +2,7 @@ package com.example.tasker.service;
 
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
+import java.time.Instant;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -31,7 +31,7 @@ public class TaskService {
     @Autowired
     private UserMapper userMapper;
 
-    public List<TaskDto> getTasks(Long userId, LocalDateTime startDate, LocalDateTime endDate, Priority priority, Boolean completedStatus) {
+    public List<TaskDto> getTasks(Long userId, Instant startDate, Instant endDate, Priority priority, Boolean completedStatus) {
         List<TaskEntity> tasks = taskRepository.findTasksByFilters(userId, startDate, endDate, priority, completedStatus);
         return tasks.stream()
             .map(taskMapper::toDto)

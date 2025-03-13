@@ -1,7 +1,8 @@
 package com.example.tasker.model;
 
 import jakarta.persistence.*;
-import java.time.LocalDateTime;
+
+import java.time.Instant;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -20,7 +21,7 @@ public class TaskEntity {
 
     private String description;
 
-    private LocalDateTime dueDate;
+    private Instant dueDate;
 
     @Enumerated(EnumType.STRING)
     private Priority priority;
