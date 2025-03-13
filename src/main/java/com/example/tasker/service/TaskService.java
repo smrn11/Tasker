@@ -56,4 +56,17 @@ public class TaskService {
     public void deleteTask(Long taskId) {
         taskRepository.deleteById(taskId);
     }
+
+    public TaskDto updateTask(Long taskId, TaskDto taskDto) {
+        TaskEntity existingTask = taskRepository.findById(taskId).orElseThrow(() -> new RuntimeException("Task not found"));
+        existingTask.setTitle(taskDto.getTitle());
+        existingTask.setDescription(taskDto.getDescription());
+        existingTask.setDueDate(taskDto.getDueDate());
+        existingTask.setPriority(taskDto.getPriority());
+        existingTask.setCompleted(taskDto.isCompleted());
+
+        taskRepository.save(existingTask);
+
+        return taskMapper.toDto(existingTask);
+    }
 }
