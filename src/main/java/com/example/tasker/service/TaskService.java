@@ -31,8 +31,11 @@ public class TaskService {
     @Autowired
     private UserMapper userMapper;
 
-    public List<TaskDto> getTasks(Long userId, Instant startDate, Instant endDate, Priority priority, Boolean completedStatus) {
-        List<TaskEntity> tasks = taskRepository.findTasksByFilters(userId, startDate, endDate, priority, completedStatus);
+    public List<TaskDto> getTasks(Long userId, String startDate, String endDate, Priority priority, Boolean completedStatus) {
+        Instant startInstant = startDate != null ? taskMapper.parseInstant(startDate) : null;
+        Instant endInstant = endDate != null ? taskMapper.parseInstant(endDate) : null;
+        
+        List<TaskEntity> tasks = taskRepository.findTasksByFilters(userId, startInstant, endInstant, priority, completedStatus);
         return tasks.stream()
             .map(taskMapper::toDto)
             .collect(Collectors.toList());
@@ -61,7 +64,7 @@ public class TaskService {
         TaskEntity existingTask = taskRepository.findById(taskId).orElseThrow(() -> new RuntimeException("Task not found"));
         existingTask.setTitle(taskDto.getTitle());
         existingTask.setDescription(taskDto.getDescription());
-        existingTask.setDueDate(taskDto.getDueDate());
+        existingTask.setDueDate(taskMapper.parseInstant(taskDto.getDueDate()));
         existingTask.setPriority(taskDto.getPriority());
         existingTask.setCompleted(taskDto.isCompleted());
 

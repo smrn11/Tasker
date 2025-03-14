@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.http.ResponseEntity;
 
 import java.util.List;
-import java.time.Instant;
 
 import org.springframework.http.HttpStatus;
 
@@ -39,8 +38,8 @@ public class TaskController {
     @GetMapping("/list/{userId}")
     public List<TaskDto> getTasks(
         @PathVariable Long userId,
-        @RequestParam(required = false) Instant startDate,
-        @RequestParam(required = false) Instant endDate,
+        @RequestParam(required = false) String startDate,
+        @RequestParam(required = false) String endDate,
         @RequestParam(required = false) Priority taskLevel,
         @RequestParam(required = false) Boolean completedStatus) {
         return taskService.getTasks(userId, startDate, endDate, taskLevel, completedStatus);
