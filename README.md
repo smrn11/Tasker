@@ -13,3 +13,4 @@ Tasker is a task management application designed to help users organize and prio
 
 Smaran Sandri
 
+TODO: Have to Enable Caching and Implement new Endpoints for Pagination (potentially?)
